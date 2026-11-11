@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PALMER EARN 🌴 - Watch 60s, Earn Fries!</title>
+<meta name="theme-color" content="#FF6D00">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:Arial,sans-serif}
+body{background:#0f0f0f;color:#fff;padding-bottom:30px}
+.top{background:linear-gradient(135deg,#FFC107,#FF6D00);color:#000;text-align:center;padding:20px;border-radius:0 0 25px 25px}
+.top h1{font-size:30px}.top p{font-weight:bold}
+.card{background:#1c1c1c;border-radius:16px;margin:12px 15px;padding:14px}
+input,select{width:100%;padding:13px;margin:6px 0;border-radius:10px;border:none;background:#2a2a2a;color:#fff;font-size:16px}
+button{width:100%;padding:14px;border:none;border-radius:12px;font-weight:bold;font-size:16px;margin:6px 0;cursor:pointer}
+.btnGreen{background:#00C853;color:#000}.btnYellow{background:#FFC107;color:#000}.btnWhite{background:#fff;color:#000}.btnRed{background:#FF5252;color:#fff}.btnBlack{background:#000;color:#fff;border:1px solid #fff}.btnWhats{background:#25D366;color:#fff}.btnSearch{background:#2962FF;color:#fff}
+button:disabled{background:#555!important;color:#aaa!important;cursor:not-allowed}
+.videoBox{background:#000;border-radius:14px;overflow:hidden;margin:8px 0}
+.videoBox iframe{width:100%;height:220px;border:none}
+.tiktokBox{background:#000;border-radius:14px;overflow:hidden;margin:8px 0}
+.progress{background:#333;height:12px;border-radius:10px;overflow:hidden;margin:8px 0}
+.fill{background:#00C853;height:100%;width:0%;transition:width 1s}
+.item{display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid #333}
+.item small{color:#aaa}
+.tabs{display:flex;gap:8px;margin:12px 15px}
+.tabs button{flex:1;padding:12px;border-radius:12px;background:#222;color:#fff;border:1px solid #FFC107}
+.tabs button.active{background:#FFC107;color:#000}
+.authTabs{display:flex;gap:8px;margin:0 0 10px 0}
+.authTabs button{flex:1;background:#2a2a2a;color:#fff}
+.authTabs button.active{background:#FFC107;color:#000}
+.check{font-size:13px;background:#2a2a2a;padding:10px;border-radius:10px;margin:6px 0;opacity:0.5}
+.check.unlocked{opacity:1;background:#1a3a1a}
+.check input{width:auto;margin-right:8px;transform:scale(1.4)}
+.loyaltyCard{background:linear-gradient(135deg,#FFC107,#FF6D00);color:#000;border-radius:14px;padding:14px;margin:8px 0;text-align:left}
+.loyaltyCard h3{font-size:20px}.loyaltyCard p{font-size:13px;font-weight:bold}
+.err{color:#FF5252;font-size:13px;margin:4px 0;display:none;background:#3a0000;padding:10px;border-radius:8px}
+.ok{color:#00E676;font-size:13px;margin:4px 0;display:none;background:#003a1a;padding:10px;border-radius:8px}
+.profilePic{width:90px;height:90px;border-radius:50%;object-fit:cover;border:3px solid #FFC107;background:#333}
+.badge{display:inline-block;padding:4px 10px;border-radius:20px;font-size:12px;font-weight:bold;margin:4px 2px}
+.badgeStudent{background:#2962FF;color:#fff}.badgeNotStudent{background:#555;color:#fff}.badgePoints{background:#FFC107;color:#000}
+</style>
+<script async src="https://www.tiktok.com/embed.js"></script>
+</head>
+<body>
+<div class="top"><h1>🌴 PALMER EARN</h1><p>WATCH 60 SEC + FOLLOW = +5 PTS</p><p style="font-size:12px;margin-top:4px">100 PTS MINIMUM = FREE FRIES 🍟 ONLY • REFERRAL = +30 PTS</p><p style="font-size:12px;margin-top:6px;background:#000;color:#FFC107;padding:6px;border-radius:8px">▶️ YouTube & 🎵 TikTok: @Palmer.fries.kisii925</p></div>
+
+<div id="page-register">
+<div class="card">
+<div class="authTabs"><button id="authRegBtn" class="active" onclick="showAuth('reg')">REGISTER 🆕</button><button id="authLoginBtn" onclick="showAuth('login')">LOGIN 🔑</button></div>
+<p id="regErr" class="err"></p><p id="regOk" class="ok"></p>
+<div id="form-register">
+<h2>JOIN FREE 🎉</h2>
+<label style="font-size:13px;color:#aaa">📸 Profile Picture</label>
+<input type="file" id="rPic" accept="image/*" onchange="previewPic(this)">
+<img id="picPreview" style="display:none;width:80px;height:80px;border-radius:50%;object-fit:cover;margin:6px 0;border:2px solid #FFC107">
+<input id="rFirst" placeholder="First Name e.g. Brian">
+<input id="rLast" placeholder="Second Name e.g. Otieno">
+<input id="rPhone" placeholder="Phone e.g. 0712345678" inputmode="tel">
+<input id="rEmail" placeholder="Email e.g. brian@gmail.com" inputmode="email">
+<label style="font-size:13px;color:#aaa">🎓 Are you a Student?</label>
+<select id="rStudent"><option value="">-- Select --</option><option value="Yes">Yes - I am a Student 🎓</option><option value="No">No - I am NOT a Student</option></select>
+<input id="rSchool" placeholder="School / College Name (if student) e.g. Kisii University">
+<input id="rRef" placeholder="Referral Code (optional) e.g. PALMER-123">
+<button class="btnGreen" id="joinBtn" onclick="register()">JOIN FREE → GET +10 BONUS + LOGIN CODE</button>
+</div>
+<div id="form-login" style="display:none">
+<h2>LOGIN 🔑</h2>
+<p style="color:#aaa;font-size:13px;margin:6px 0">Enter your phone + your 6-digit Login Code you got when you registered.</p>
+<input id="loginPhone" placeholder="Phone e.g. 0712345678" inputmode="tel">
+<input id="loginCode" placeholder="Login Code e.g. 482910" inputmode="numeric" maxlength="6">
+<button class="btnGreen" onclick="doLogin()">LOGIN NOW ✅</button>
+<button class="btnYellow" onclick="forgotCode()">FORGOT CODE? — SEND ME NEW CODE 📲</button>
+<p id="forgotMsg" style="font-size:13px;color:#FFC107;display:none;margin-top:6px"></p>
+</div>
+</div>
+<div class="card"><b>HOW TO EARN — FRIES ONLY</b><p style="line-height:1.7;margin-top:8px">▶️ YouTube @Palmer.fries.kisii925: Watch 60 sec + Follow = <b style="color:#FF5252">+5 PTS</b><br>🎵 TikTok @Palmer.fries.kisii925: Watch 60 sec + Follow = <b style="color:#00E676">+5 PTS</b><br>👥 Invite Friend = <b style="color:#FFC107">+30 PTS</b><br>🎁 Join Bonus = <b>+10 PTS</b><br><br>🏆 <b>100 PTS = FREE FRIES 🍟</b><br>⚠️ Minimum 100 pts • Max 4 videos/day<br>💳 MUST have PALMER Loyalty Card<br>🔒 MUST watch full 60 sec before ticking</p></div>
+<div class="card"><button class="btnWhite" onclick="showAdmin()">I AM ADMIN 👑</button></div>
+<div class="card" style="text-align:center"><b>📍 FIND PALMER</b><p style="font-size:13px;color:#aaa;margin:6px 0">Kisii Town, Near Kisii University Gate<br>Follow: @Palmer.fries.kisii925</p><a href="https://wa.me/254182572149?text=Hi%20PALMER!%20Where%20are%20you%20located%3F" target="_blank"><button class="btnWhats">TAP TO EAT ON WHATSAPP 📲 0182572149</button></a></div>
+</div>
+
+<div id="page-home" style="display:none">
+<div class="card" style="text-align:center">
+<img id="profileImg" class="profilePic" src="">
+<h2 id="userName" style="margin-top:6px">User</h2>
+<p><span class="badge badgeStudent" id="studentBadge">🎓 STUDENT</span> <span class="badge badgePoints" id="pointsBadge">0 PTS</span></p>
+<p style="font-size:13px;color:#aaa" id="profileDetails">Phone • Email</p>
+<p style="font-size:13px;color:#aaa" id="schoolLine"></p>
+<h2 style="font-size:44px;color:#FFC107;margin-top:6px"><span id="myPoints">0</span> PTS</h2>
+<p style="font-size:13px">Goal: 100 PTS MINIMUM for FREE Fries</p><div class="progress"><div class="fill" id="goalFill"></div></div><p id="goalText" style="font-size:13px;color:#ccc"></p>
+<p style="font-size:13px;margin-top:6px">Today's Videos Watched: <b id="todayCount" style="color:#00E676">0 / 4</b></p>
+<div class="loyaltyCard"><h3>💳 PALMER LOYALTY CARD</h3><p id="loyaltyNum">CARD: PALMER-0000</p><p id="loyaltyName">NAME: -</p><p style="font-size:11px;margin-top:4px">SHOW THIS CARD TO REDEEM YOUR FREE FRIES</p></div>
+<p style="margin-top:8px">Your Referral Code: <b id="myCode" style="color:#00E676">PALMER-000</b> • Login Code: <b id="myLoginCode" style="color:#FFC107">------</b></p>
+<button class="btnYellow" onclick="shareInvite()">SHARE LINK + EARN +30 PER FRIEND 📲</button></div>
+<div class="tabs"><button id="tb1" class="active" onclick="tab('yt')">YOUTUBE ▶️</button><button id="tb2" onclick="tab('tt')">TIKTOK 🎵</button><button id="tb3" onclick="tab('rewards')">REWARDS 🍟</button><button id="tb4" onclick="tab('mine')">MY PROFILE</button></div>
+<div id="tab-yt">
+<div class="card"><b>▶️ YOUTUBE TASK 1 — @Palmer.fries.kisii925</b><p style="font-size:12px;color:#FFC107;margin:4px 0">🔒 Watch full 60 sec first — box unlocks after watching</p>
+<div class="videoBox"><iframe src="https://www.youtube.com/embed/b6Ib0iIdv3A" allowfullscreen></iframe></div>
+<a href="https://www.youtube.com/results?search_query=%40Palmer.fries.kisii925" target="_blank"><button class="btnSearch">🔍 SEARCH & WATCH MY YOUTUBE VIDEOS ▶️</button></a>
+<a href="https://youtube.com/@Palmer.fries.kisii925" target="_blank"><button class="btnRed">1. FOLLOW ON YOUTUBE 🔴 @Palmer.fries.kisii925</button></a>
+<div class="check" id="checkBoxY1"><input type="checkbox" id="cY1" disabled> I followed @Palmer.fries.kisii925 on YouTube (unlocks after 60 sec)</div>
+<div class="progress"><div class="fill" id="pY1"></div></div><p id="tY1" style="font-size:13px">Press START to start 60 sec timer</p>
+<button class="btnGreen" id="startY1" onclick="startTimer(60,'pY1','tY1','claimY1','cY1','checkBoxY1','startY1')">2. START 60 SEC WATCH ⏱️</button>
+<button id="claimY1" class="btnYellow" style="display:none" onclick="claimTask('cY1','YouTube Task 1',5,'claimY1')">CLAIM +5 PTS 🎉</button>
+</div>
+<div class="card"><b>▶️ YOUTUBE TASK 2 — @Palmer.fries.kisii925</b><p style="font-size:12px;color:#FFC107;margin:4px 0">🔒 Watch full 60 sec first — box unlocks after watching</p>
+<div class="videoBox"><iframe src="https://www.youtube.com/embed/b6Ib0iIdv3A" allowfullscreen></iframe></div>
+<a href="https://www.youtube.com/results?search_query=%40Palmer.fries.kisii925" target="_blank"><button class="btnSearch">🔍 SEARCH & WATCH MY YOUTUBE VIDEOS ▶️</button></a>
+<a href="https://youtube.com/@Palmer.fries.kisii925" target="_blank"><button class="btnRed">1. FOLLOW ON YOUTUBE 🔴 @Palmer.fries.kisii925</button></a>
+<div class="check" id="checkBoxY2"><input type="checkbox" id="cY2" disabled> I followed @Palmer.fries.kisii925 on YouTube (unlocks after 60 sec)</div>
+<div class="progress"><div class="fill" id="pY2"></div></div><p id="tY2" style="font-size:13px">Press START</p>
+<button class="btnGreen" id="startY2" onclick="startTimer(60,'pY2','tY2','claimY2','cY2','checkBoxY2','startY2')">2. START 60 SEC WATCH ⏱️</button>
+<button id="claimY2" class="btnYellow" style="display:none" onclick="claimTask('cY2','YouTube Task 2',5,'claimY2')">CLAIM +5 PTS 🎉</button>
+</div>
+</div>
+<div id="tab-tt" style="display:none">
+<div class="card"><b>🎵 TIKTOK TASK 1 — @Palmer.fries.kisii925</b><p style="font-size:12px;color:#FFC107;margin:4px 0">🔒 Watch full 60 sec first — box unlocks after watching</p>
+<div class="tiktokBox"><blockquote class="tiktok-embed" cite="https://vm.tiktok.com/ZSpmrps1J/" data-video-id="ZSpmrps1J" style="max-width:605px;min-width:325px;"><section><a target="_blank" href="https://www.tiktok.com/@palmer.fries.kisii925">@palmer.fries.kisii925</a></section></blockquote></div>
+<a href="https://vm.tiktok.com/ZSpmrps1J/" target="_blank"><button class="btnBlack">▶️ WATCH THIS TIKTOK VIDEO FULL 60 SEC</button></a>
+<a href="https://www.tiktok.com/search?q=%40Palmer.fries.kisii925" target="_blank"><button class="btnSearch">🔍 SEARCH & WATCH MY TIKTOK VIDEOS 🎵</button></a>
+<a href="https://www.tiktok.com/@Palmer.fries.kisii925" target="_blank"><button class="btnBlack">1. FOLLOW ON TIKTOK 🎵 @Palmer.fries.kisii925</button></a>
+<div class="check" id="checkBoxT1"><input type="checkbox" id="cT1" disabled> I followed @Palmer.fries.kisii925 on TikTok (unlocks after 60 sec)</div>
+<div class="progress"><div class="fill" id="pT1"></div></div><p id="tT1" style="font-size:13px">Press START</p>
+<button class="btnGreen" id="startT1" onclick="startTimer(60,'pT1','tT1','claimT1','cT1','checkBoxT1','startT1')">2. START 60 SEC WATCH ⏱️</button>
+<button id="claimT1" class="btnYellow" style="display:none" onclick="claimTask('cT1','TikTok Task 1',5,'claimT1')">CLAIM +5 PTS 🎉</button>
+</div>
+<div class="card"><b>🎵 TIKTOK TASK 2 — @Palmer.fries.kisii925</b><p style="font-size:12px;color:#FFC107;margin:4px 0">🔒 Watch full 60 sec first — box unlocks after watching</p>
+<div class="tiktokBox"><blockquote class="tiktok-embed" cite="https://vm.tiktok.com/ZSpmrps1J/" data-video-id="ZSpmrps1J" style="max-width:605px;min-width:325px;"><section><a target="_blank" href="https://www.tiktok.com/@palmer.fries.kisii925">@palmer.fries.kisii925</a></section></blockquote></div>
+<a href="https://vm.tiktok.com/ZSpmrps1J/" target="_blank"><button class="btnBlack">▶️ WATCH THIS TIKTOK VIDEO FULL 60 SEC</button></a>
+<a href="https://www.tiktok.com/search?q=%40Palmer.fries.kisii925" target="_blank"><button class="btnSearch">🔍 SEARCH & WATCH MY TIKTOK VIDEOS 🎵</button></a>
+<a href="https://www.tiktok.com/@Palmer.fries.kisii925" target="_blank"><button class="btnBlack">1. FOLLOW ON TIKTOK 🎵 @Palmer.fries.kisii925</button></a>
+<div class="check" id="checkBoxT2"><input type="checkbox" id="cT2" disabled> I followed @Palmer.fries.kisii925 on TikTok (unlocks after 60 sec)</div>
+<div class="progress"><div class="fill" id="pT2"></div></div><p id="tT2" style="font-size:13px">Press START</p>
+<button class="btnGreen" id="startT2" onclick="startTimer(60,'pT2','tT2','claimT2','cT2','checkBoxT2','startT2')">2. START 60 SEC WATCH ⏱️</button>
+<button id="claimT2" class="btnYellow" style="display:none" onclick="claimTask('cT2','TikTok Task 2',5,'claimT2')">CLAIM +5 PTS 🎉</button>
+</div>
+</div>
+<div id="tab-rewards" style="display:none">
+<div class="card"><b>🎁 REDEEM — FRIES ONLY 🍟</b><p style="font-size:13px;color:#aaa;margin:6px 0">Minimum 100 Points. Must have Loyalty Card. Fries Only.</p>
+<input id="loyaltyInput" placeholder="Enter Your Loyalty Card Number e.g. PALMER-1234">
+<div class="item"><div><b>🏆 FREE FRIES (Large Plate) 🍟</b><br><small>100 Points • Minimum Redeem</small></div><button style="width:auto;padding:10px 16px" class="btnYellow" onclick="redeem(100,'FREE Fries Large')">REDEEM 100</button></div>
+<div class="item"><div><b>🍟🍟 FREE FRIES x2 (Double)</b><br><small>200 Points</small></div><button style="width:auto;padding:10px 16px" class="btnGreen" onclick="redeem(200,'FREE Fries x2')">REDEEM 200</button></div>
+</div>
+<div class="card" style="text-align:center"><b>📍 TAP TO EAT — COME GET YOUR FRIES!</b><p style="font-size:13px;color:#aaa;margin:8px 0">PALMER Location: Kisii Town, Near Kisii University Gate<br>WhatsApp: 0182572149<br>Follow: @Palmer.fries.kisii925</p><a href="https://wa.me/254182572149?text=Hi%20PALMER!%20I%20want%20to%20eat%20my%20FREE%20Fries!" target="_blank"><button class="btnWhats">TAP TO EAT 📲 WHATSAPP 0182572149</button></a><a href="https://maps.google.com/?q=Kisii+Town+Kisii+University" target="_blank"><button class="btnWhite">VIEW LOCATION ON MAP 📍</button></a></div>
+</div>
+<div id="tab-mine" style="display:none"><div class="card" style="text-align:center"><img id="profileImg2" class="profilePic" src=""><h3 id="profileName2"></h3><p id="profileFull2" style="font-size:13px;color:#aaa"></p><p id="profileStudent2" style="font-size:13px"></p></div><div class="card"><b>MY LOYALTY CARD & HISTORY</b><div id="history"></div></div><div class="card"><button class="btnWhite" onclick="logout()">Logout</button></div></div>
+</div>
+<div id="page-admin" style="display:none">
+<div class="card"><b>👑 ADMIN DASHBOARD</b><input id="adminPass" type="password" placeholder="Admin PIN (default 1234)"><button class="btnYellow" onclick="adminLogin()">VIEW</button><p style="font-size:13px;margin:6px 0">Users: <b id="adminUsers">0</b> • Total Points: <b id="adminPoints">0</b> • Fries Redeems: <b id="adminFries">0</b> • Students: <b id="adminStudents">0</b></p><div id="adminData"></div><button class="btnRed" onclick="clearAll()">Reset All</button><button class="btnWhite" onclick="backToHome()">Back</button></div>
+</div>
+<script>
+let users=[]; let current=null; let hist=[]; let tempPic="";
+try{ users=JSON.parse(localStorage.getItem('palmer_earn_v10')||'[]'); }catch(e){ users=[]; }
+try{ current=JSON.parse(localStorage.getItem('palmer_earn_current_v10')||'null'); }catch(e){ current=null; }
+try{ hist=JSON.parse(localStorage.getItem('palmer_earn_hist_v10')||'[]'); }catch(e){ hist=[]; }
+function todayKey(){ return new Date().toDateString(); }
+function cleanPhone(p){ return String(p||'').replace(/[\s\-\+]/g,'').replace(/^254/,'0'); }
+function getTodayCount(){ if(!current) return 0; if(current.lastDate!==todayKey()) return 0; return current.todayCount||0; }
+function save(){ try{ localStorage.setItem('palmer_earn_v10',JSON.stringify(users)); localStorage.setItem('palmer_earn_current_v10',JSON.stringify(current)); localStorage.setItem('palmer_earn_hist_v10',JSON.stringify(hist)); }catch(e){ alert("Photo too big! Use smaller photo."); } }
+function showErr(msg){ let el=document.getElementById('regErr'); el.style.display='block'; el.innerText=msg; document.getElementById('regOk').style.display='none'; }
+function showOk(msg){ let el=document.getElementById('regOk'); el.style.display='block'; el.innerText=msg; document.getElementById('regErr').style.display='none'; }
+function hideMsg(){ document.getElementById('regErr').style.display='none'; document.getElementById('regOk').style.display='none'; }
+function showAuth(which){ hideMsg(); document.getElementById('form-register').style.display=which=='reg'?'block':'none'; document.getElementById('form-login').style.display=which=='login'?'block':'none'; document.getElementById('authRegBtn').className=which=='reg'?'active':''; document.getElementById('authLoginBtn').className=which=='login'?'active':''; }
+function previewPic(input){ let f=input.files[0]; if(!f) return; let r=new FileReader(); r.onload=function(e){ tempPic=e.target.result; let img=document.getElementById('picPreview'); img.src=tempPic; img.style.display='block'; }; r.readAsDataURL(f); }
+function genCode(){ return Math.floor(100000+Math.random()*900000).toString(); }
+function register(){
+  let f=document.getElementById('rFirst').value.trim(), l=document.getElementById('rLast').value.trim(), pRaw=document.getElementById('rPhone').value.trim(), e=document.getElementById('rEmail').value.trim().toLowerCase();
+  let student=document.getElementById('rStudent').value, school=document.getElementById('rSchool').value.trim();
+  if(!tempPic){ showErr("❌ Please upload your Profile Picture first"); return; }
+  if(!f||!l){ showErr("❌ Please enter BOTH First Name and Second Name"); return; }
+  if(!pRaw){ showErr("❌ Please enter your Phone number"); return; }
+  let p=cleanPhone(pRaw);
+  if(p.length!==10||!p.startsWith('0')){ showErr("❌ Wrong phone! Use format 0712345678 — 10 digits starting with 0"); return; }
+  if(!e||!e.includes('@')||!e.includes('.')){ showErr("❌ Wrong email! Example: brian@gmail.com"); return; }
+  if(!student){ showErr("❌ Select: Are you a Student? Yes or No"); return; }
+  if(student==='Yes' && !school){ showErr("❌ You said Yes Student — enter School / College Name"); return; }
+  let exists=users.find(u=>cleanPhone(u.phone)===p);
+  if(exists){ showErr("⚠️ This phone "+p+" already joined! Go to LOGIN tab. Your Login Code is: "+exists.loginCode); showAuth('login'); document.getElementById('loginPhone').value=p; document.getElementById('loginCode').value=exists.loginCode; return; }
+  let code="PALMER-"+Math.floor(100+Math.random()*900);
+  let card="PALMER-"+Math.floor(1000+Math.random()*9000);
+  let loginCode=genCode();
+  current={first:f,last:l,phone:p,email:e,student:student,school:student==='Yes'?school:'Not a student',pic:tempPic,code:code,card:card,loginCode:loginCode,points:10,todayCount:0,lastDate:todayKey(),joinedAt:new Date().toLocaleString()};
+  let ref=document.getElementById('rRef').value.trim().toUpperCase();
+  if(ref){ let ru=users.find(u=>(u.code||'').toUpperCase()===ref); if(ru){ ru.points+=30; hist.unshift({name:ru.first+" "+ru.last, acti
